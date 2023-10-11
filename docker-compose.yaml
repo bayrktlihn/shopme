@@ -1,0 +1,26 @@
+services:
+  postgres:
+    restart: unless-stopped
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: bayrktlihn
+      POSTGRES_USER: bayrktlihn
+      POSTGRES_DB: bayrktlihn
+    volumes:
+      - type: bind
+        source: ./data
+        target: /var/lib/postgresql/data
+    networks:
+      bayrktlihn:
+        ipv4_address: 192.168.0.2
+
+volumes:
+  bayrktlihn:
+networks:
+  bayrktlihn:
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
